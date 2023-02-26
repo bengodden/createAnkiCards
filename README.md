@@ -11,5 +11,5 @@ In Google Chrome:
 		Url: <<paste in the contents of the file ankiGrab_bookmarklet.js above>>
 		
 
-Then watch this video: ______________ on how to use the bookmarklet.
+Then watch this video: https://youtu.be/Hiz7wsUKaFg on how to use the bookmarklet.
 
