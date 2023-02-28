@@ -171,6 +171,19 @@ javascript: (() => {
         delete window.buttonDefault;
         delete window.btnBaseCss;
       }
+    } else {
+      document.getElementById("get-cree").remove();
+      document.getElementById("get-english").remove();
+      document.getElementById("log-text").remove();
+      document.getElementById("export-text").remove();
+      document.getElementById("button-quit").remove();
+      document.getElementById("div-container").remove();
+      delete window.cree;
+      delete window.english;
+      delete window.exportText;
+      delete window.url;
+      delete window.buttonDefault;
+      delete window.btnBaseCss;
     }
   }
 })();

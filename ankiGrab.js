@@ -33,7 +33,6 @@ container.appendChild(buttonEnglish);
 const buttonAdd = document.createElement("Button");
 buttonAdd.setAttribute("id", "log-text");
 buttonAdd.innerHTML = "Log";
-// buttonAdd.style = "background-color: #5e5a5a;";
 buttonAdd.onclick = function () {
   addToList();
 };
@@ -42,9 +41,6 @@ container.appendChild(buttonAdd);
 const buttonExport = document.createElement("Button");
 buttonExport.setAttribute("id", "export-text");
 buttonExport.innerHTML = "Export";
-// buttonExport.style = "background-color: #5e5a5a;";
-// Need to add a disabled class on button Export that disables it until it is enabled with a call from buttonAdd (#log-text)
-// document.getElementById("Button").disabled = true;
 buttonExport.onclick = function () {
   export2Anki();
 };
@@ -115,10 +111,10 @@ function addToList() {
     exportText += `${cree}\|${english}\|${url}\n`;
     buttonCree.style = buttonDefault;
     buttonEnglish.style = buttonDefault;
-    buttonAdd.style = "background-color: #5e5a5a;";
     document.getElementById("export-text").classList.remove("cssClassDisabled");
     document.getElementById("export-text").className = "cssClass";
-    // document.getElementById("export-text").disabled = false;
+    document.getElementById("log-text").classList.remove("cssClass");
+    document.getElementById("log-text").className = "cssClassDisabled";
     console.log(`Added to Log: \n ${cree}\|${english}\|${url}\n`);
     cree = "";
     english = "";
@@ -143,30 +139,43 @@ function export2Anki() {
     element.click();
     document.body.removeChild(element);
     exportable = false;
-    document.getElementById("export-text").className = "cssClass";
-    document.getElementById("export-text").classList.remove("cssClassDisabled");
+    document.getElementById("export-text").className = "cssClassDisabled";
+    document.getElementById("export-text").classList.remove("cssClass");
   }
 }
 
 function quitting() {
-  document.getElementById("get-cree").remove();
-  document.getElementById("get-english").remove();
-  document.getElementById("log-text").remove();
-  document.getElementById("export-text").remove();
-  document.getElementById("button-quit").remove();
-  document.getElementById("div-container").remove();
-  delete window.cree;
-  delete window.english;
-  delete window.exportText;
-  delete window.url;
-  delete window.buttonDefault;
-  delete window.btnBaseCss;
-}
+  if (exportable == true) {
+    let prompt = confirm(
+      "You currently have cards logged but not exported. Quit anyway?"
+    );
 
-// function getFilename() {
-//   const url = window.location.href;
-//   filenameOne = /.net\/(.+)/.exec(url)[1];
-//   filenameTwo = /([^.]+)/.exec(filenameOne)[1];
-//   filename = `${filenameTwo}.txt`;
-//   return filename;
-// }
+    if (prompt != false) {
+      document.getElementById("get-cree").remove();
+      document.getElementById("get-english").remove();
+      document.getElementById("log-text").remove();
+      document.getElementById("export-text").remove();
+      document.getElementById("button-quit").remove();
+      document.getElementById("div-container").remove();
+      delete window.cree;
+      delete window.english;
+      delete window.exportText;
+      delete window.url;
+      delete window.buttonDefault;
+      delete window.btnBaseCss;
+    }
+  } else {
+    document.getElementById("get-cree").remove();
+    document.getElementById("get-english").remove();
+    document.getElementById("log-text").remove();
+    document.getElementById("export-text").remove();
+    document.getElementById("button-quit").remove();
+    document.getElementById("div-container").remove();
+    delete window.cree;
+    delete window.english;
+    delete window.exportText;
+    delete window.url;
+    delete window.buttonDefault;
+    delete window.btnBaseCss;
+  }
+}
